@@ -60,6 +60,9 @@ class User_Level {
 }
 new User_Level();
 
-$UL_Levels = new UL_Levels(1);
+/*
+add_action('wp_footer', function(){
+    $UL_Levels = new UL_Seller_Levels(1);
 echo $UL_Levels->get_seller_level();
-
+});
+*/

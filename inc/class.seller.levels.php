@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 use WeDevs\Dokan\Cache;
 
-class UL_Levels {
+class UL_Seller_Levels {
     public $start_date = '';
     public $end_date = '';
     public $current_user_id = '';
@@ -38,11 +38,14 @@ class UL_Levels {
     //Get seller level
     public function get_seller_level(){
         
-        //$this->vendor_report($this->seller_id);
-        $total_seles = $this->get_seller_orders_by_day();
-        $total_order = $this->get_seller_seles_by_day();
-        $the_user = get_user_by( 'id', $this->seller_id );
-        print_r( $this->get_seller_average_rating($the_user->ID) );
+        $total_seles = $this->get_seller_seles_by_day();
+        $total_order = $this->get_seller_orders_by_day();
+        $average_rating = $this->get_seller_average_rating_in_percentage();
+        //$the_user = get_user_by( 'id', $this->seller_id );
+        
+        echo $total_seles.'-';
+        echo $total_order.'-';
+        echo $average_rating;
     }
     
     //Get seles by day
@@ -68,10 +71,9 @@ class UL_Levels {
         ], $this->start_date, $this->end_date, $this->seller_id );
 
         $total_sales    = $order_totals->total_sales;
-        $total_orders   = absint( $order_totals->total_orders );
         
         $net_seles = ($total_sales - $total_refunded);
-        return $total_sales;
+        return $net_seles;
     }
     
     //Get orders by day
@@ -125,38 +127,11 @@ class UL_Levels {
         
         $average_rating = $this->get_seller_average_rating($this->seller_id);
         
-        $x = $average_rating['rating'];
+        $x = (int) $average_rating['rating'];
         $total = 5;
         $percentage = ($x*100)/$total;
         return $percentage;
     }
-    
-    /*public function vendor_report($vendor_id) {
-        $total_sales = $total_orders = $order_items = $discount_total = $shipping_total = 0;
-        
-        $total_refunded = $this->get_seller_refunded_amount();
-
-        $order_totals = $this->get_order_report_data( [
-            'data' => [
-                '_order_total' => [
-                    'type'     => 'meta',
-                    'function' => 'SUM',
-                    'name'     => 'total_sales',
-                ],
-                'ID' => [
-                    'type'     => 'post_data',
-                    'function' => 'COUNT',
-                    'name'     => 'total_orders',
-                ],
-            ],
-            'filter_range' => true,
-        ], $this->start_date, $this->end_date, $vendor_id );
-
-        $total_sales    = $order_totals->total_sales;
-        $total_orders   = absint( $order_totals->total_orders );
-        
-        $net_seles = ($total_sales - $total_refunded);
-    }*/
     
     public function get_seller_refunded_amount(){
         global $wpdb;
@@ -417,4 +392,4 @@ class UL_Levels {
     }
     
 }
-//new UL_Levels();
+//new UL_Seller_Levels();
