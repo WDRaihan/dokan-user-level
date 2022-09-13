@@ -26,7 +26,17 @@ class User_Level {
         add_action( 'wp_enqueue_scripts', array($this, 'wp_scripts') );
         
         /*
-        * Seller levels
+        * Staff banners
+        */
+        //Admin banner
+        define( 'ADMIN_BANNER', USER_LEVEL_BANNERS.'/staff/admin.gif' );
+        define( 'STAFF_BANNER', USER_LEVEL_BANNERS.'/staff/staff.gif' );
+        define( 'CM_BANNER', USER_LEVEL_BANNERS.'/staff/community-manager.gif' );
+        //Banned banner
+        define( 'BANNED_BANNER', USER_LEVEL_BANNERS.'/banned.png' );
+        
+        /*
+        * Seller banners
         */
         //Change Level 0
         define( 'SELLER_LEVEL_0', USER_LEVEL_BANNERS.'/seller/LV0.png' );
@@ -47,7 +57,7 @@ class User_Level {
         define( 'SELLER_LEVEL_5', USER_LEVEL_BANNERS.'/seller/LV5.gif' );
         
         /*
-        * Buyer levels
+        * Buyer banners
         */
         //Change Level 1
         define( 'BUYER_LEVEL_0', USER_LEVEL_BANNERS.'/buyer/LV0.png' );

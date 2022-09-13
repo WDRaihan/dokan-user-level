@@ -145,6 +145,31 @@ class UL_Seller_Levels {
         return $total_orders;
     }
     
+    //Get total orders
+    public function get_seller_total_orders(){
+        $total_orders = 0;
+        
+        $order_totals = $this->get_order_report_data( [
+            'data' => [
+                '_order_total' => [
+                    'type'     => 'meta',
+                    'function' => 'SUM',
+                    'name'     => 'total_sales',
+                ],
+                'ID' => [
+                    'type'     => 'post_data',
+                    'function' => 'COUNT',
+                    'name'     => 'total_orders',
+                ],
+            ],
+            'filter_range' => true,
+        ], '2020-01-01', '6020-01-01', $this->seller_id );
+
+        $total_orders   = absint( $order_totals->total_orders );
+        
+        return $total_orders;
+    }
+    
     //Get average rating
     public function get_seller_average_rating($seller_id){
         
