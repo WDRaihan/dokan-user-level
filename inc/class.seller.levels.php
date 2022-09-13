@@ -43,9 +43,53 @@ class UL_Seller_Levels {
         $average_rating = $this->get_seller_average_rating_in_percentage();
         //$the_user = get_user_by( 'id', $this->seller_id );
         
-        echo $total_seles.'-';
-        echo $total_order.'-';
-        echo $average_rating;
+        $seller_level = array();
+        
+        if( $total_seles >= SELLER_LEVEL_5_SELES && $total_order >= SELLER_LEVEL_5_ORDERS && $average_rating >= SELLER_LEVEL_5_RATING ){
+            
+            $seller_level = array(
+                'level'      => '5',
+                'banner_url' => SELLER_LEVEL_5
+            );
+            
+        }elseif( $total_seles >= SELLER_LEVEL_4_SELES && $total_order >= SELLER_LEVEL_4_ORDERS && $average_rating >= SELLER_LEVEL_4_RATING ){
+            
+            $seller_level = array(
+                'level'      => '4',
+                'banner_url' => SELLER_LEVEL_4
+            );
+            
+        }elseif( $total_seles >= SELLER_LEVEL_3_SELES && $total_order >= SELLER_LEVEL_3_ORDERS && $average_rating >= SELLER_LEVEL_3_RATING ){
+            
+            $seller_level = array(
+                'level'      => '3',
+                'banner_url' => SELLER_LEVEL_3
+            );
+            
+        }elseif( $total_seles >= SELLER_LEVEL_2_SELES && $total_order >= SELLER_LEVEL_2_ORDERS && $average_rating >= SELLER_LEVEL_2_RATING ){
+            
+            $seller_level = array(
+                'level'      => '2',
+                'banner_url' => SELLER_LEVEL_2
+            );
+            
+        }elseif( $total_seles >= SELLER_LEVEL_1_SELES && $total_order >= SELLER_LEVEL_1_ORDERS && $average_rating >= SELLER_LEVEL_1_RATING ){
+            
+            $seller_level = array(
+                'level'      => '1',
+                'banner_url' => SELLER_LEVEL_1
+            );
+            
+        }else {
+            
+            $seller_level = array(
+                'level'      => '0',
+                'banner_url' => SELLER_LEVEL_0
+            );
+        }
+        
+        return $seller_level;
+        
     }
     
     //Get seles by day
